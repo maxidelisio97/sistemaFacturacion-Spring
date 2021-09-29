@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Spring Boot</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/listar}">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/form}">Formulario</a>
+        </li>
+       
+    </div>
+  </div>
+</nav>
+	<div class="container">
+	<h1 th:text="${titulo}"></h1>
+	<table class="table table-dark table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+				<th>Fecha</th>
+				<th>Accion</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="cliente: ${clientes}">
+				<td th:text="${cliente.id}"></td>
+				<td th:text="${cliente.nombre}"></td>
+				<td th:text="${cliente.apellido}"></td>
+				<td th:text="${cliente.email}"></td>
+				<td th:text="${cliente.fecha}"></td>
+				<td>
+				<a class="btn btn-primary btn-xs" th:href="@{/form/} + ${cliente.id}" th:text="Editar"></a>
+				<a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${cliente.id}" th:text="Eliminar" onclick="return confirm('¿Desea eliminar el registro?');"></a>
+				</td>
+			</tr>
+
+		</tbody>
+
+	</table>
+	
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
