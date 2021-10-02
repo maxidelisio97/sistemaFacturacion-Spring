@@ -1,102 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title th:text="${titulo}"></title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-	crossorigin="anonymous">
-
+<head th:replace="layout/layout :: head">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Spring Boot</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" th:href="@{/listar}">Clientes</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/form}">Formulario</a>
-					</li>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<!-- IMPRIMIR LA LISTA DE ERRORES -->
+				<div th:object="${cliente}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+						<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/form}" th:object="${cliente}" method="POST">
+					<div class="form-group row">
+
+						<label class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{nombre}" class="form-control" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+								th:errorclass="'form-control alert-danger'"></small>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Apellido</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{apellido}" class="form-control" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+								th:errorclass="'form-control alert-danger'"></small>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{email}" class="form-control" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								th:errorclass="'form-control alert-danger'"></small>
+						</div>
+					</div>
+					<br />
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-5">
+							<input type="text" th:field="*{fecha}" class="form-control" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"
+								th:errorclass="'form-control alert-danger'"></small>
+						</div>
+					</div>
+					<br />
+					<div class="form-group">
+						<input type="submit" value="Crear cliente" class="btn btn-primary" />
+					</div>
+				</form>
 			</div>
 		</div>
-	</nav>
-	<div class="container">
-		<h1 th:text="${titulo}"></h1>
-
-		<!-- IMPRIMIR LA LISTA DE ERRORES -->
-		<div th:object="${cliente}" th:remove="tag">
-			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-			</ul>
-		</div>
-
-		<form th:action="@{/form}" th:object="${cliente}" method="POST">
-			<div class="form-group row">
-
-				<label class="col-sm-1 col-form-label">Nombre</label>
-				<div class="col-sm-4">
-					<input type="text" th:field="*{nombre}" class="form-control" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-						th:errorclass="'form-control alert-danger'"></small>
-				</div>
-			</div>
-			<br />
-			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Apellido</label>
-				<div class="col-sm-4">
-					<input type="text" th:field="*{apellido}" class="form-control" />
-					<small class="form-text text-danger"
-						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-						th:errorclass="'form-control alert-danger'"></small>
-				</div>
-			</div>
-			<br />
-			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Email</label>
-				<div class="col-sm-4">
-					<input type="text" th:field="*{email}" class="form-control" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-						th:errorclass="'form-control alert-danger'"></small>
-				</div>
-			</div>
-			<br />
-			<div class="form-group row">
-				<label class="col-sm-1 col-form-label">Fecha</label>
-				<div class="col-sm-4">
-					<input type="text" th:field="*{fecha}" class="form-control" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"
-						th:errorclass="'form-control alert-danger'"></small>
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<input type="submit" value="Crear cliente" class="btn btn-primary" />
-			</div>
-		</form>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-		integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
-		integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-		crossorigin="anonymous"></script>
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

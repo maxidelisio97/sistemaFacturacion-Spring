@@ -17,9 +17,8 @@ public class ClienteServiceImpl implements IClienteService {
 	@Autowired
 	private IClienteDao clienteDao;
 
-	@Override
 	public List<Cliente> getClientes() {		
-		return clienteDao.getClientes();
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
@@ -29,12 +28,12 @@ public class ClienteServiceImpl implements IClienteService {
 
 	@Override
 	public Cliente findOne(Long id) {
-		return clienteDao.findOne(id);
+		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Override
 	public void delete(Long id) {
-		clienteDao.delete(id);
+		clienteDao.deleteById(id);
 	}
 
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link
+	th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" th:href="@{/listar}">Listar clientes</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/form}">Crear cliente</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+	</header>
+	<div class="container"></div>
+
+	<footer th:fragment="footer" class="container">
+		<hr />
+		<img th:src=@{/images/springg.png} alt="Spring logo" />
+		<p>
+			Construido con <a href="https//projects.spring.io/spring-boot/">Spring
+				Boot</a> y <a href="http//thymeleaf.org">Thymeleaf</a>
+		</p>
+		<p>
+			Este proyecto fue desarrollado por Maximiliano De Lisio. <br />
+			&copy; Delisio Company 2021. Todos los derechos reservados. Términos
+			de uso y privacidad.<br />
+		</p>
+
+		<script src="@{/js/bootstrap.min.js}"></script>		
+		<script src="@{/js/jquery-3.6.0.min.js}"></script>	
+		<script src="@{/js/popper.min.js}"></script>	
+
+	</footer>
+
+</body>
+</html>
