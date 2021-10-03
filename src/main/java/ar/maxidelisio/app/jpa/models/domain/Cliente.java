@@ -34,6 +34,8 @@ public class Cliente implements Serializable{
 	@NotNull
 	private Date fecha;
 	
+	private String foto;
+	
 	public Cliente () {}
 
 	public Cliente(Long id, String nombre, String apellido, String email, Date fecha) {		
@@ -85,11 +87,19 @@ public class Cliente implements Serializable{
 		this.fecha = fecha;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
 				+ ", createAt=" + fecha + "]";
 	}
+
 	
 	
 	

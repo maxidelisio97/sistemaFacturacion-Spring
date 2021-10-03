@@ -18,7 +18,7 @@
 					</ul>
 				</div>
 
-				<form th:action="@{/form}" th:object="${cliente}" method="POST">
+				<form th:action="@{/form}" th:object="${cliente}" method="POST" enctype="multipart/form-data">
 					<div class="form-group row">
 
 						<label class="col-sm-2 col-form-label">Nombre</label>
@@ -60,9 +60,17 @@
 						</div>
 					</div>
 					<br />
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Foto</label>
+						<div class="col-sm-5">
+							<input type="file" name="file" class="form-control" />							
+						</div>
+					</div>
+					<br />
 					<div class="form-group">
 						<input type="submit" value="Crear cliente" class="btn btn-primary" />
 					</div>
+					
 				</form>
 			</div>
 		</div>
