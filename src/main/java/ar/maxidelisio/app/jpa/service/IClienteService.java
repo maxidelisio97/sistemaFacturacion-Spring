@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ar.maxidelisio.app.jpa.models.domain.Cliente;
+import ar.maxidelisio.app.jpa.models.domain.Factura;
+import ar.maxidelisio.app.jpa.models.domain.Producto;
 
 
 public interface IClienteService {
@@ -19,4 +21,14 @@ public interface IClienteService {
 	public Cliente findOne(Long id);
 	
 	public void delete(Long id);
+	
+	public List<Producto> findByName(String nameProd);
+	
+	public void saveFactura(Factura factura);
+	
+	public Producto findProductoById(Long id);
+	
+	public Factura findFacturaById(Long id);
+	
+	public void deleteFacturaById(Long id);
 }

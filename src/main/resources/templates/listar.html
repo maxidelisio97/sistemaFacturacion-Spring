@@ -33,7 +33,9 @@
 							<td th:text="${cliente.apellido}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.fecha}"></td>
-							<td><a class="btn btn-primary btn-xs"
+							<td><a class="btn btn-success btn-xs"
+								th:href="@{/factura/form/} + ${cliente.id}" th:text="'Crear factura'"></a>
+							<a class="btn btn-primary btn-xs"
 								th:href="@{/form/} + ${cliente.id}" th:text="Editar"></a> <a
 								class="btn btn-danger btn-xs"
 								th:href="@{/eliminar/} + ${cliente.id}" th:text="Eliminar"

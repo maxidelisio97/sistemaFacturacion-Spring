@@ -11,6 +11,7 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 
+
 				<!-- IMPRIMIR LA LISTA DE ERRORES -->
 				<div th:object="${cliente}" th:remove="tag">
 					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">

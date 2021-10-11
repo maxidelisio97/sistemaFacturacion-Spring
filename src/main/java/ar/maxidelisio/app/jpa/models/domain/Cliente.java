@@ -1,7 +1,9 @@
 package ar.maxidelisio.app.jpa.models.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -36,7 +38,13 @@ public class Cliente implements Serializable{
 	
 	private String foto;
 	
-	public Cliente () {}
+	@OneToMany(mappedBy = "cliente" , fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Factura> facturas;
+	
+	public Cliente () {
+		
+		facturas = new ArrayList<>();
+	}	
 
 	public Cliente(Long id, String nombre, String apellido, String email, Date fecha) {		
 		this.id = id;
@@ -94,10 +102,25 @@ public class Cliente implements Serializable{
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	
+	
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
+	
+	public void addFactura(Factura factura) {
+		facturas.add(factura);
+	}
+
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-				+ ", createAt=" + fecha + "]";
+		return nombre  + ' ' + apellido; 
+			
 	}
 
 	
